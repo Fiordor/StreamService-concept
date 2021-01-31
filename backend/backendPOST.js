@@ -21,7 +21,11 @@ exports.serie_name = function(req, res) {
         json.info[id - 1][3] = body.minute;
         json.info[id - 1][4] = body.watched;
 
-        fs.writeFile(jsonPath, json, 'utf8', (err) => { if (err) console.log('Error: POST serie_name bad save') });
+        
+        fs.writeFile(jsonPath, JSON.stringify(json), 'utf8', (err) => {
+            if (err) console.log('Error: POST serie_name bad save')
+            else console.log('POST serie_name save');
+        });
 
         res.send('ok');
 
