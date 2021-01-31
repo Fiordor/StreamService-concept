@@ -1,0 +1,88 @@
+https://tio.zonarutoppuden.com/content/stream-2.php?id=/n-sub/1
+
+https://tio.zonarutoppuden.com/content/stream.php?id=/ns-sub/X X=capítulo
+
+/** NEW **/
+
+GET '/serie'
+@return lista con todas las series disponibles
+
+/** NEW **/
+
+@id name nombre de la serie
+
+GET '/serie/:name'
+@return int número de capítulos de la serie
+
+/** NEW **/
+
+@id name nombre de la serie
+@param id número del capítulo que se pide
+
+GET '/serie/:name?id=A'
+
+@return url del mp4 del capítulo con valor de id A
+
+/** NEW **/
+@id name nombre de la serie
+
+GET 'serie/:name/arco'
+@return json con la información del los arcos con el formato
+    { "arco" : [ [ NAME_ARCO , CAP_INI, CAP_FIN, ES_RELLENO ], [...], ... ] }
+    donde NAME_ARCO = título del arco, CAP_INI = capítulo de inicio,
+    CAP_FIN = capítulo final, ES_RELLENO = true si el arco contiene todo
+    capítulos de relleno
+
+
+GET 'serie/:name/arco?ini=A&fin=B'
+@return json con la información del los arcos que contangan los capítulos dentro
+    del rango A Bcon el formato
+    { "arco" : [ [ NAME_ARCO , CAP_INI, CAP_FIN, ES_RELLENO ], [...], ... ] }
+    donde NAME_ARCO = título del arco, CAP_INI = capítulo de inicio,
+    CAP_FIN = capítulo final, ES_RELLENO = true si el arco contiene todo
+    capítulos de relleno
+
+/** NEW **/
+
+@id name nombre de la serie
+
+GET '/serie/:name/info' 
+@return json de los capítulos con el formato
+    { "info" : [ [ ID, NAME_CAP, ES_RELLENO, DUR, VISTO ], [...], ... ] }
+    donde ID = número del capítulo, NAME_CAP = nombre del capítulo,
+    ES_RELLENO = true si es relleno, DUR = minutos vistos, VISTO = capítulo visto
+
+/** NEW **/
+
+@id name nombre de la serie
+@param ini entero indicando inicio del rango de capítulos que se pide
+@param fin entero indicando fin del rango de capítulos que se pide
+
+GET '/serie/:name/info?ini=A&fin=B'
+@return json de los capítulos dentro del rango [A, B] con el formato
+    { "info" : [ [ ID, NAME_CAP, ES_RELLENO, DUR, VISTO ], [...], ... ] }
+    donde ID = número del capítulo, NAME_CAP = nombre del capítulo,
+    ES_RELLENO = true si es relleno, DUR = minutos vistos, VISTO = capítulo visto
+
+/** NEW **/
+
+@id nombre_serie nombre de la serie
+
+GET '/serie/:name/seassons'
+@return json de las temporadas con el formato
+    { "seassons" : [ [ NUM_SEASSON, CAP_INI, CAP_FIN ], [...], ... ] }
+    donde NUM_SEASSON = número de la temporada, CAP_INI = capítulo inicio,
+    CAP_FIN = capítulo final
+
+
+
+
+
+/** NEW **/
+
+@id name nombre de la serie
+@param id número del capítulo que se pide
+@param { "minute" : int , "watched" : bool }
+
+POST '/serie/:name?id=A'
+
