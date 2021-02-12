@@ -31,3 +31,29 @@ exports.serie_name = function(req, res) {
 
     });
 }
+
+exports.serie_name_last = function(req, res) {
+
+    let body = req.body;
+
+    let jsonPath = fun.getPathJSON(req);
+
+    fs.readFile(jsonPath, function(err, data) {
+
+        if (err) { res.send('Error: POST serie_name_last'); return; }
+
+        let json = JSON.parse(data);
+
+        if (!fun.existsId(body.id, json)) { res.send('Error: POST serie_name id'); return; }
+
+        json.last = body.id;
+        
+        fs.writeFile(jsonPath, JSON.stringify(json), 'utf8', (err) => {
+            if (err) console.log('Error: POST serie_name_last bad save')
+            else console.log('POST serie_name_last save');
+        });
+
+        res.send('ok');
+
+    });
+}
