@@ -4,6 +4,31 @@ const SHIPPUDEN = './shippuden.json';
 
 const { networkInterfaces } = require('os');
 
+exports.existsArco = (arco, json) => {
+    return arco != undefined &&
+        Number.isInteger(arco) &&
+        arco >= 1 &&
+        arco <= json.arcos.length;
+}
+
+exports.existsId = (id, json) => {
+    return id != undefined &&
+        Number.isInteger(id) &&
+        id >= 1 &&
+        id <= json.number;
+}
+
+exports.existsSeasson = (seasson, json) => {
+    return seasson != undefined &&
+        Number.isInteger(seasson) &&
+        seasson >= 1 &&
+        seasson <= json.seassons.length;
+}
+
+exports.getIdInfo = (id, list) => {
+
+    return list[id - 1];
+}
 
 exports.getIp = () => {
 
@@ -22,32 +47,6 @@ exports.getIp = () => {
         }
     }
     return results;
-}
-
-exports.existsId = (id, json) => {
-    return id != undefined &&
-        Number.isInteger(id) &&
-        id >= 1 &&
-        id <= json.number;
-}
-
-exports.existsSeasson = (seasson, json) => {
-    return seasson != undefined &&
-        Number.isInteger(seasson) &&
-        seasson >= 1 &&
-        seasson <= json.seassons.length;
-}
-
-exports.existsArco = (arco, json) => {
-    return arco != undefined &&
-        Number.isInteger(arco) &&
-        arco >= 1 &&
-        arco <= json.arcos.length;
-}
-
-exports.getIdInfo = (id, list) => {
-
-    return list[id - 1];
 }
 
 exports.getPathJSON = (req) => {
