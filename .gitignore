@@ -1,6 +1,5 @@
 /backend/node_modules
 /backend/relleno
-
 /frontend/build
-frontend/coverage
+/frontend/coverage
 /frontend/node_modules
