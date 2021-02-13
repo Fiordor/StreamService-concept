@@ -25,7 +25,78 @@ exports.existsSeasson = (seasson, json) => {
         seasson <= json.seassons.length;
 }
 
-exports.getIdInfo = (id, list) => {
+exports.existsShow = (show, json) => {
+    return show != undefined &&
+        (show == 'seasson' || show == 'arco');
+}
+
+exports.findByIdTheArco = (id, json) => {
+
+    let arcos = json.arcos;
+    
+    for (let i = 0; i < arcos.length; i++) {
+
+        if (arcos[i][2] <= id && id <= arcos[i][3]) {
+            return arcos[i][0];
+        }
+    }
+    return null;
+}
+
+exports.findByIdTheSeasson = (id, json) => {
+
+    let seassons = json.seassons;
+    
+    for (let i = 0; i < seassons.length; i++) {
+
+        if (seassons[i][1] <= id && id <= seassons[i][2]) {
+            return seassons[i][0];
+        }
+    }
+    return null;
+}
+
+exports.getInfoArco = (id, json) => {
+
+    let arco = {
+        fin : json.arcos[id][3],
+        ini : json.arcos[id][2],
+        id : json.arcos[id][0],
+        relleno : json.arcos[id][4],
+        title : json.arcos[id][1]
+    };
+
+    return arco;
+}
+
+exports.getInfoChapter = (id, json) => {
+
+    id--;
+
+    let chapter = {
+        id : json.info[id][0],
+        finish : json.info[id][4],
+        minute : json.info[id][3],
+        relleno : json.info[id][2],
+        title : json.info[id][1],
+        url : this.getUrl(json.info[id][0], json)
+    };
+
+    return chapter;
+}
+
+exports.getInfoSeasson = (id, json) => {
+
+    let seasson = {
+        fin : json.seassons[id][2],
+        ini : json.seassons[id][1],
+        id : json.seassons[id][0],
+    };
+
+    return seasson;
+}
+
+exports.getInfoId = (id, list) => {
 
     return list[id - 1];
 }

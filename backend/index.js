@@ -20,6 +20,8 @@ app.get('/serie/:name', backendGET.serie_name);
 
 app.get('/serie/:name/arcos', backendGET.serie_name_arcos);
 
+app.get('/serie/:name/last', backendGET.serie_name_last);
+
 app.get('/serie/:name/seassons', backendGET.serie_name_seassons);
 
 
