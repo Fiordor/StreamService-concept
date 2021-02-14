@@ -15,7 +15,7 @@ exports.init = function(req, res) {
 
 exports.serie = function(req, res) {
     
-    let json = JSON.parse( '{ "series" : [ "Naruto", "Shippuden" ], "size" : 2 }' );
+    let json = JSON.parse( '{ "series" : [ "naruto", "shippuden" ], "size" : 2 }' );
 
     res.setHeader('Content-Type', 'application/json');
     res.send(json);

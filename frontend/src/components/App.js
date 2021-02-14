@@ -19,7 +19,7 @@ function mapLink(json) {
 function mapRoute(json) {
   return json.series.map( (item, key) => (
     <Route key={key} path={ '/' + item }>
-      <SerieList />
+      <SerieList serieName={item} />
     </Route>
   ) );
 }
@@ -49,7 +49,7 @@ function App() {
           setError(error);
         }
       )
-  }, [])
+  }, []);
 
   if (error) {
     return <div>Error: {error}</div>;
