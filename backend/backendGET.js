@@ -102,7 +102,7 @@ exports.serie_name_last = function(req, res) {
 
             let json_out = {
                 arco : fun.findByIdTheArco(id, json),
-                last : id,
+                last : fun.getInfoChapter(id, json),
                 seasson : fun.findByIdTheSeasson(id, json)
             };
 
@@ -110,10 +110,12 @@ exports.serie_name_last = function(req, res) {
             
         } else {
 
+            let id = json.last;
+
             let json_out = {
-                id : json.last,
                 idList : 0,
                 info : [],
+                last : fun.getInfoChapter(id, json),
                 relleno : undefined,
                 title : ''
             };
@@ -122,7 +124,7 @@ exports.serie_name_last = function(req, res) {
 
             if (show === 'seasson') {
 
-                let id_seasson = fun.findByIdTheSeasson(json_out.id, json);
+                let id_seasson = fun.findByIdTheSeasson(id, json);
                 let seasson = json.seassons[id_seasson - 1];
                 json_out.idList = id_seasson;
                 json_out.title = 'seasson ' + id_seasson;
@@ -131,7 +133,7 @@ exports.serie_name_last = function(req, res) {
 
             } else {
 
-                let id_arco = fun.findByIdTheArco(json_out.id, json);
+                let id_arco = fun.findByIdTheArco(id, json);
                 let arco = json.arcos[id_arco - 1];
                 json_out.idList = id_arco;
                 json_out.relleno = arco[4];
