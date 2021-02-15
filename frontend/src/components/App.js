@@ -19,7 +19,7 @@ function mapLink(json) {
 function mapRoute(json) {
   return json.series.map( (item, key) => (
     <Route key={key} path={ '/' + item }>
-      <SerieList serieName={item} />
+      <SerieList location={'/' + item} />
     </Route>
   ) );
 }

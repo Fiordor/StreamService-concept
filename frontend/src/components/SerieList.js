@@ -1,26 +1,44 @@
+import Chapter from './Chapter';
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  Link
 } from 'react-router-dom';
 
-function mapInfo(json) {
+function mapLink(location, json) {
 
   return json.info.map( (item, key) => (
     <li key={key}>
-      <a href={item.url}>{item.id} {item.title}</a>
+      <Link to={location + '/' + item.id}>{item.id} {item.title}</Link>
     </li>
+  ) );
+}
+
+function mapRoute(location, json) {
+
+  return json.info.map( (item, key) => (
+    <Route key={key} path={location + '/' + item.id}>
+      <Chapter
+        index={item.id - json.info[0].id}
+        info={json.info}
+        location={location + '/' + item.id}
+        locationParent={location}
+        title={json.title} />
+    </Route>
   ) );
 }
 
 function renderLast(json) {
 
-  return <a href={json.last.url}>{json.last.id} {json.last.title}</a>;
+  //console.log(json.last);
+  //return <a href={json.last.url}>{json.last.id} {json.last.title}</a>;
 }
 
 function SerieList(object) {
+
+  const location = object.location;
 
   const [error, setError] = useState(false);
   const [isLoaded1, setIsLoaded1] = useState( false);
@@ -36,6 +54,8 @@ function SerieList(object) {
 
   const [json, setJSON] = useState({ id : 1, idList : 1, info : [ '' ], relleno : undefined, title : '' });
 
+  
+
   const change = () => {
 
     if (json.title == jsonSeasson.title) {
@@ -50,7 +70,7 @@ function SerieList(object) {
   // similar to componentDidMount()
   useEffect(() => {
 
-    let url = 'http://localhost:8000/serie/' + object.serieName + '/';
+    let url = 'http://localhost:8000/serie' + location + '/';
 
     let urls = [
       url + 'last?show=seasson',
@@ -93,25 +113,30 @@ function SerieList(object) {
   if (error) {
     return <h1>error</h1>;
   } else if (!isLoaded1 || !isLoaded2 || !isLoaded3 || !isLoaded4) {
-    return <h1>loading...</h1>
+    return <h1>loading...</h1>;
   } else {
     
     return (
       <div>
-        <div>
-          <div>{renderLast(json)}</div>
-          <div>
-            <div>
-              <div>{json.title}</div>
+        <Router>
+          <Switch>
+            <Route exact path={location}>
+              <div>{renderLast(json)}</div>
               <div>
-                <button onClick={ () => { change() } } >Change</button>
+                <div>
+                  <div>{json.title}</div>
+                  <div>
+                    <button onClick={ () => { change() } } >Change</button>
+                  </div>
+                </div>
+                <ul>
+                  {mapLink(location, json)}
+                </ul>
               </div>
-            </div>
-            <ul>
-              {mapInfo(json)}
-            </ul>
-          </div>
-        </div>
+            </Route>
+            {mapRoute(location, json)}
+          </Switch>
+        </Router>
       </div>
     );
   }
