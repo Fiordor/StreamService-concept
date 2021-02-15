@@ -52,11 +52,11 @@ function Chapter(object) {
   useEffect(() => {
 
     if (chapter.id - 1 <= 0) {
-      document.getElementById('bt-l').classList.add('disabled');
+      document.getElementById('bt-l').classList.add('disabled-chapter');
     }
 
     if (chapter.id + 1 > object.info.length) {
-      document.getElementById('bt-r').classList.add('disabled');
+      document.getElementById('bt-r').classList.add('disabled-chapter');
     }
 
     let interval = -1;
@@ -91,22 +91,22 @@ function Chapter(object) {
     <Router>
       <Switch>
         <Route exact path={object.location}>
-          <div className="chapter">
-            <div className="column lateral">
-              <div className="bt-l" id="bt-l">
-                <Link to={object.locationParent + '/' + (chapter.id - 1)}>
+          <div className="main-chapter">
+            <div className="column-chapter lateral-chapter">
+              <div className="bt-l-chapter" id="bt-l">
+                <Link className="a-chapter" to={object.locationParent + '/' + (chapter.id - 1)}>
                   <svg width="50" height="50">
-                    <polygon points="0,0 25,43 50,0" />
+                    <polygon className="polygon-chapter" points="0,0 25,43 50,0" />
                   </svg>
                 </Link>
               </div>
             </div>
-            <div className="column center">
-              <div className="titles">
-                <div className="tl1">
+            <div className="column-chapter center-chapter">
+              <div className="titles-chapter">
+                <div className="tl1-chapter">
                   {object.title} {'#' + chapter.id} {chapter.relleno ? '🔴' : '🟢'}
                 </div>
-                <div className="tl2">
+                <div className="tl2-chapter">
                   {chapter.title}
                 </div>
               </div>
@@ -114,11 +114,11 @@ function Chapter(object) {
                 <source src={chapter.url} type="video/mp4" />
               </video>
             </div>
-            <div className="column lateral">
-              <div className="bt-r" id="bt-r">
-                <Link to={object.locationParent + '/' + (chapter.id + 1)}>
+            <div className="column-chapter lateral-chapter">
+              <div className="bt-r-chapter" id="bt-r">
+                <Link className="a-chapter" to={object.locationParent + '/' + (chapter.id + 1)}>
                   <svg width="50" height="50">
-                    <polygon points="0,0 25,43 50,0" />
+                    <polygon className="polygon-chapter" points="0,0 25,43 50,0" />
                   </svg>
                 </Link>
               </div>
