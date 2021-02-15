@@ -12,15 +12,19 @@ body {
   color: #f2a30b;
 }
 
-polygon {
+.chapter polygon {
   fill:#f2a30b;
 }
 
-video {
+.chapter video {
   box-shadow: 0px 0px 10px 0px #fbe407;
 }
 
-.main {
+.chapter a {
+  display: block;
+}
+
+.chapter {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -31,34 +35,34 @@ video {
   transform: translate(-50%, -50%);
 }
 
-.column {
+.chapter .column {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.lateral {
+.chapter .lateral {
   margin-top: 100px;
 }
 
-.center {
+.chapter .center {
   margin-left: 50px;
   margin-right: 50px;
 }
 
-.bt-l {
+.chapter .bt-l {
   width: 50px;
   height: 50px;
   transform: rotate(90deg);
 }
 
-.bt-r {
+.chapter .bt-r {
   width: 50px;
   height: 50px;
   transform: rotate(-90deg);
 }
 
-.titles {
+.chapter .titles {
 
   display: flex;
   flex-direction: column;
@@ -68,10 +72,15 @@ video {
   height: 100px;
 }
 
-.titles .tl1 {
+.chapter .titles .tl1 {
   font-size: 18px;
 }
 
-.titles .tl2 {
+.chapter .titles .tl2 {
   font-size: 24px;
+}
+
+.chapter .disabled {
+  pointer-events: none;
+  opacity: .5;
 }
